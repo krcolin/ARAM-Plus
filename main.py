@@ -103,6 +103,6 @@ def print_teams_with_champions(team1, team2, champion_allocation):
 if __name__ == "__main__":
     while True:
         main()
-        restart = input(f"\n{RESET}Enter om nog een keer tegaan of 'exit' om te stoppen").lower()
+        restart = input(f"\n{RESET}Enter om nog een keer tegaan of 'exit' om te stoppen... ").lower()
         if restart == 'exit':
             break
