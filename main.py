@@ -19,17 +19,18 @@ RED = "\033[31m"
 GREEN = "\033[32m"
 BLUE = "\033[34m"
 RESET = "\033[30m"
+
+print(logo)
+
+while True:
+    input_names = input(f"Enter 6 namen met een , er tussen: ")
+    namen = [name.strip() for name in input_names.split(',')]
+    if len(namen) == 6:
+        break
+    else:
+        print("Error: Vul 6 namen in.")
+
 def main():
-    print(logo)
-
-    while True:
-        input_names = input(f"Enter 6 namen met een , er tussen: ")
-        namen = [name.strip() for name in input_names.split(',')]
-        if len(namen) == 6:
-            break
-        else:
-            print("Error: Vul 6 namen in.")
-
     random.shuffle(namen)
 
     team1 = namen[0:3]
