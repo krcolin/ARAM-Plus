@@ -4,6 +4,7 @@ from data.data import champions, logo
 import os
 import ctypes
 
+# CHAT-GPT Generated code to change cmd prompt design
 ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004
 STD_OUTPUT_HANDLE = -11
 handle = ctypes.windll.kernel32.GetStdHandle(STD_OUTPUT_HANDLE)
@@ -13,6 +14,7 @@ mode.value |= ENABLE_VIRTUAL_TERMINAL_PROCESSING
 ctypes.windll.kernel32.SetConsoleMode(handle, mode)
 systeem = os.system('color F0')
 
+# Colors for cmd
 RED = "\033[31m"
 GREEN = "\033[32m"
 BLUE = "\033[34m"
@@ -21,7 +23,13 @@ RESET = "\033[30m"
 print(logo)
 
 
+# Function to get 6 names from input
 def get_names():
+    """
+    A function that prompts the user to enter 6 names separated by commas, then returns the names as a list if there are exactly 6 names entered. Otherwise, it prints an error message and continues prompting for input.
+
+    :return: list: The list of names entered by the user.
+    """
     while True:
         input_names = input(f"Enter 6 namen met een , er tussen: ")
         namen = [name.strip() for name in input_names.split(',')]
@@ -48,13 +56,30 @@ def main():
     print_teams_with_champions(team1, team2, champions_per_player)
 
 
-def assign_champions_interactively(team1, team2, champions):
+def assign_champions_interactively(team1: list, team2: list, champions: list):
+    """
+    Assigns champions interactively to two teams of players from a pool of available champions.
+
+    :param team1: List of players in team 1.
+    :param team2: List of players in team 2.
+    :param champions: List of available champions.
+    :return: A dictionary containing the allocation of champions to each player in the format {player: "Champion 1, Champion 2, ..."}.
+    :rtype: dict
+    """
     global count
     champions_pool = champions[:]
     champion_allocation = {player: [] for player in team1 + team2}
     count = 0
 
-    def player_select_champion(player, champions_pool):
+    def player_select_champion(player: str, champions_pool: list):
+        """
+        Selects a champion for the player from the given champions pool.
+
+        :param player: The player for whom the champion is being selected.
+        :param champions_pool: The pool of champions to select from.
+        :return: The chosen champion selected from the pool.
+        :rtype: str
+        """
         global count
         if count % 2 == 0:
             kleur = BLUE
@@ -94,7 +119,15 @@ def assign_champions_interactively(team1, team2, champions):
     return champion_allocation
 
 
-def print_teams_with_champions(team1, team2, champion_allocation):
+def print_teams_with_champions(team1: list, team2: list, champion_allocation: dict):
+    """
+    Print teams with champions and their allocations.
+
+    :param team1: list of strings representing the players in the blue team
+    :param team2: list of strings representing the players in the red team
+    :param champion_allocation: dictionary mapping player names to their allocated champions
+
+    """
     print(f"\n{BLUE}Blue:")
     for player in team1:
         print(f"\t{player.title()}: {champion_allocation[player]}")
