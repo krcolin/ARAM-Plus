@@ -4,7 +4,6 @@ from data.data import champions, logo
 import os
 import ctypes
 
-
 ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004
 STD_OUTPUT_HANDLE = -11
 handle = ctypes.windll.kernel32.GetStdHandle(STD_OUTPUT_HANDLE)
@@ -14,7 +13,6 @@ mode.value |= ENABLE_VIRTUAL_TERMINAL_PROCESSING
 ctypes.windll.kernel32.SetConsoleMode(handle, mode)
 systeem = os.system('color F0')
 
-
 RED = "\033[31m"
 GREEN = "\033[32m"
 BLUE = "\033[34m"
@@ -22,13 +20,19 @@ RESET = "\033[30m"
 
 print(logo)
 
-while True:
-    input_names = input(f"Enter 6 namen met een , er tussen: ")
-    namen = [name.strip() for name in input_names.split(',')]
-    if len(namen) == 6:
-        break
-    else:
-        print("Error: Vul 6 namen in.")
+
+def get_names():
+    while True:
+        input_names = input(f"Enter 6 namen met een , er tussen: ")
+        namen = [name.strip() for name in input_names.split(',')]
+        if len(namen) == 6:
+            return namen
+        else:
+            print("Error: Vul 6 namen in.")
+
+
+namen = get_names()
+
 
 def main():
     random.shuffle(namen)
@@ -42,7 +46,6 @@ def main():
     champions_per_player = assign_champions_interactively(team1, team2, champions)
 
     print_teams_with_champions(team1, team2, champions_per_player)
-
 
 
 def assign_champions_interactively(team1, team2, champions):
@@ -104,6 +107,9 @@ def print_teams_with_champions(team1, team2, champion_allocation):
 if __name__ == "__main__":
     while True:
         main()
-        restart = input(f"\n{RESET}Enter om nog een keer tegaan of 'exit' om te stoppen... ").lower()
-        if restart == 'exit':
+        prompt = input(f"\n{RESET}Enter voor reroll, 'namen' om nieuwe "
+                       f"namen toe te voegen of 'exit' om te stoppen... ").lower()
+        if prompt == 'exit':
             break
+        if prompt == 'namen':
+            namen = get_names()
