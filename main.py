@@ -63,9 +63,12 @@ def create_champion_selection_area():
     # Clear the selection area
     for widget in champion_selection_frame.winfo_children():
         widget.destroy()
-
-    tk.Label(champion_selection_frame, text=f"{current_player}'s Turn to Choose a Champion:", fg="black",
-             font=FONT).grid(row=0, column=0, padx=10, pady=10)
+    if current_player in team1:
+        color = "blue"
+    else:
+        color = "red"
+    tk.Label(champion_selection_frame, text=f"{current_player}'s Turn to Choose a Champion:", fg=color,
+             font=FONT, bg="#f5f0e4").grid(row=0, column=0, padx=10, pady=10)
 
     champion_choices = random.sample(champions_pool, AMT_CHMPS)
     for idx, champ in enumerate(champion_choices):
@@ -120,7 +123,8 @@ name_labels = []
 
 
 def initialize_champion_selection():
-    global champions_pool, player_champion, interleaved_players, current_player, current_player_index, champion_selection_frame
+    global champions_pool, player_champion, interleaved_players, current_player, current_player_index, \
+        champion_selection_frame, team1, team2
     # Shuffle names and prepare interleaved player list for turn-based selection
     random.shuffle(names)
     players_per_team = len(names) // 2
@@ -138,13 +142,14 @@ def initialize_champion_selection():
     teams_frame.columnconfigure(1, weight=1)
     for idx, player in enumerate(team1):
         player_label = tk.Label(teams_frame, text=player, font=FONT, fg="blue")
-        player_label.grid(column=0, row=idx, sticky="ew")
+        player_label.grid(column=0, row=idx, sticky="we")
         name_labels.append(player_label)
     for idx, player in enumerate(team2):
         player_label = tk.Label(teams_frame, text=player, font=FONT, fg="red")
-        player_label.grid(column=1, row=idx, sticky="ew")
+        player_label.grid(column=1, row=idx, sticky="we")
         name_labels.append(player_label)
     champion_selection_frame.grid(row=2, column=0, columnspan=2, padx=10, pady=10, sticky="nswe")
+    champion_selection_frame.configure(highlightbackground="grey", highlightthickness=2, bg="#f5f0e4")
     create_champion_selection_area()
 
 
