@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import messagebox, simpledialog
 from PIL import Image, ImageTk
 
-PLAYERS = simpledialog.askinteger("Input", "How many players?", minvalue=2, maxvalue=10)
+PLAYERS = simpledialog.askinteger("Input", "How many players?", minvalue=2, maxvalue=10, initialvalue=6)
 FONT = ("Helvetica", 18)
 AMT_CHMPS = 3
 
