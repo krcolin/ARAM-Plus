@@ -60,15 +60,11 @@ for index, _ in enumerate(range(PLAYERS)):
 
 
 def create_champion_selection_area():
+    # Clear the selection area
     for widget in champion_selection_frame.winfo_children():
         widget.destroy()
-    if current_player in team1:
-        color = "blue"
-    else:
-        color = "red"
 
-
-    tk.Label(champion_selection_frame, text=f"{current_player}'s Turn to Choose a Champion:", fg=color,
+    tk.Label(champion_selection_frame, text=f"{current_player}'s Turn to Choose a Champion:", fg="black",
              font=FONT).grid(row=0, column=0, padx=10, pady=10)
 
     champion_choices = random.sample(champions_pool, AMT_CHMPS)
@@ -124,8 +120,7 @@ name_labels = []
 
 
 def initialize_champion_selection():
-    global champions_pool, player_champion, interleaved_players, current_player, current_player_index,\
-        champion_selection_frame, team1 ,team2
+    global champions_pool, player_champion, interleaved_players, current_player, current_player_index, champion_selection_frame
     # Shuffle names and prepare interleaved player list for turn-based selection
     random.shuffle(names)
     players_per_team = len(names) // 2
@@ -150,7 +145,6 @@ def initialize_champion_selection():
         player_label.grid(column=1, row=idx, sticky="ew")
         name_labels.append(player_label)
     champion_selection_frame.grid(row=2, column=0, columnspan=2, padx=10, pady=10, sticky="nswe")
-    champion_selection_frame.configure(highlightbackground="grey", highlightthickness=1, relief="raised")
     create_champion_selection_area()
 
 
