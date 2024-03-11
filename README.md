@@ -16,4 +16,4 @@ d88P     888 888   T88b d88P     888 888       888
                                                            
 
                                                            
-ARAM 3v3 Custom Generator (Nederlands)
+ARAM Custom generator
