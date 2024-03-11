@@ -25,6 +25,7 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+3v3.pyw
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -107,6 +108,7 @@ pip-selfcheck.json
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
+.pyw
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
